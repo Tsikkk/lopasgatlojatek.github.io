@@ -3,9 +3,55 @@ img{
 }
 
 header{
-    text-align: center;
+    background-color: #0F0069;
+    height: 270px;
+    align-items: center;
+    display: flex;
+  
+}
+h1{
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 128px;
+    font-weight: bold;
+    color: #FFFFFF;
 }
 
 main{
     text-align: center;
+}
+body{
+    background-image: url("../kepek/hatter.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.felsök{
+    background-color: rgba(255, 255, 255, 0.50);
+    align-items: center;
+    display: flex;
+    width: 200px;
+    height: 60px;
+}
+.feli{
+    font-size: 32px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+}
+.belsoszamok{
+    background-color: rgba(0, 0, 0, 0.31);
+    width: 70px;
+    height: 70px;
+    
+    color: #FFFFFF;
+    align-items: center;
+    display: flex;
+
+}
+.szamok{
+    font-size: 32px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
 }
