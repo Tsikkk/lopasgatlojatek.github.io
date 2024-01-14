@@ -1,48 +1,83 @@
-var szam=null
-var szam2=60
+var boardIsSolved = false;
+var szam = 1;
+var szam2 = 2;
 
-function easy(){
-    var szam2=20
+function easy() {
+    szam2 = 20;
+    generateSudokuBoard();
+    startTimer();
 }
-function medium(){
-    var szam2=30
+
+function medium() {
+    szam2 = 30;
+    generateSudokuBoard();
+    startTimer();
 }
-function hard(){
-    var szam2=40
+
+function hard() {
+    szam2 = 40;
+    generateSudokuBoard();
+    startTimer();
 }
-function expert(){
-    var szam2=50
+
+function expert() {
+    szam2 = 50;
+    generateSudokuBoard();
+    startTimer();
 }
-function master(){
-    var szam2=60
+
+function master() {
+    szam2 = 60;
+    generateSudokuBoard();
+    startTimer();
 }
+
 
 function one(){
-    szam=1
+    if (szam !== null) {
+        szam = 1;
+    }
 }
+
 function two(){
-    szam=2
+    if (szam !== null) {
+        szam = 2;
+    }
 }
 function three(){
-    szam=3
+    if (szam !== null) {
+        szam = 3;
+    }
 }
 function four(){
-    szam=4
+    if (szam !== null) {
+        szam = 4;
+    }
 }
 function five(){
-    szam=5
+    if (szam !== null) {
+        szam = 5;
+    }
 }
 function six(){
-    szam=6
+    if (szam !== null) {
+        szam = 6;
+    }
 }
 function seven(){
-    szam=7
+    if (szam !== null) {
+        szam = 7;
+    }
 }
 function eight(){
-    szam=8
+    if (szam !== null) {
+        szam = 8;
+    }
 }
 function nine(){
-    szam=9
+    if (szam !== null) {
+        szam = 9;
+    }
 }
 
 
@@ -87,6 +122,18 @@ function solveSudoku(board) {
     }
     return true;
 }
+function checkBoardCorrectness(board) {
+    // Check if the board is correctly solved
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+            if (board[i][j] !== noBoard[i][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 var a = 0;
 
 function generateSudokuBoard() {
@@ -125,7 +172,26 @@ function generateSudokuBoard() {
             const currentCell = taclaT[i];
             if (currentCell.id) {
                 currentCell.addEventListener('click', function () {
-                    currentCell.innerText = szam;
+                    // Check if the clicked cell is empty
+                    if (board[Math.floor(i / 9)][i % 9] === null) {
+                        if (szam !== null) {
+                            if (szam !== oBoard[Math.floor(i / 9)][i % 9]) {
+                                currentCell.style.backgroundColor = 'red';
+                                setTimeout(function () {
+                                    currentCell.style.backgroundColor = ''; // Reset color after a short delay
+                                }, 1000); // Adjust the delay as needed
+                            } else {
+                                // Correct number, reset background color
+                                currentCell.style.backgroundColor = '';
+                            }
+        
+                            currentCell.innerText = szam;
+        
+                            // Update valami array
+                            valami.push({ row: Math.floor(i / 9), col: i % 9, value: szam });
+                            console.log(valami); // Log the updated array
+                        }
+                    }
                 });
             }
         }
@@ -145,17 +211,12 @@ function generateSudokuBoard() {
                 taclaT[i].innerHTML = boardLine[i];
             }
         }
-        console.log(oBoard);
+        
+        
     }
 }
-function valt(){
-    console.log("asd")
 
-}
-function valt2(){
-    console.log('asd')
-}
-
+var valami=[]
 function remove(board,num){
     let randRow=0
     let randCol=0
@@ -166,14 +227,58 @@ function remove(board,num){
         if (board[randRow][randCol]!=0&&board[randRow][randCol]!=null) {
             board[randRow][randCol]=null
             counter++
+            
+            valami.push(randRow+','+randCol)
         }
         
         
     }
 }
+console.log(valami)
 
-
+function checkUserInput() {
+    for (let i = 0; i < valami.length; i++) {
+        const { row, col, value } = valami[i];
+        if (noBoard[row][col] !== value) {
+            return false; // User input doesn't match original board
+        }
+    }
+    return true; // User input matches original board
+}
 
 
 // Generate and display the Sudoku board
 generateSudokuBoard();
+
+
+
+$(document).ready(function(){
+    $("#myModal").modal('show');
+});
+let timerInterval;
+    let seconds = 0;
+    let minutes = 0;
+    let hours = 0;
+
+    function startTimer() {
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function updateTimer() {
+        seconds++;
+        if (seconds === 60) {
+            seconds = 0;
+            minutes++;
+            if (minutes === 60) {
+                minutes = 0;
+                hours++;
+            }
+        }
+
+        const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+        document.getElementById('timerDisplay').innerText = formattedTime;
+    }
+
+    function pad(value) {
+        return value < 10 ? `0${value}` : value;
+    }
