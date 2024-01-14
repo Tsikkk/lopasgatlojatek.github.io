@@ -1,6 +1,21 @@
-const tabla=document.getElementById("tabla")
-
 var szam=null
+var szam2=60
+
+function easy(){
+    var szam2=20
+}
+function medium(){
+    var szam2=30
+}
+function hard(){
+    var szam2=40
+}
+function expert(){
+    var szam2=50
+}
+function master(){
+    var szam2=60
+}
 
 function one(){
     szam=1
@@ -31,280 +46,134 @@ function nine(){
 }
 
 
-// Function to generate a solved Sudoku board
-function generateSolvedSudoku() {
-    const board = [];
-    const size = 9;
+var firstRow = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+var shuffledFirstRow = firstRow.sort(() => 0.5 - Math.random());
+const sudokuBoard=document.getElementById('sudokuBoard')
+const taclaT=document.getElementsByClassName('number')
+var oBoard=[]
+var noBoard=[]
 
-    // Initialize an empty board
-    for (let i = 0; i < size; i++) {
-      board[i] = [];
-      for (let j = 0; j < size; j++) {
-        board[i][j] = 0;
-      }
-    }
 
-    // Solve the Sudoku
-    solveSudoku(board);
 
-    return board;
-  }
 
-  // Function to solve Sudoku using backtracking
-  function solveSudoku(board) {
-    const size = 9;
-
-    // Find an empty cell
-    const emptyCell = findEmptyCell(board);
-    if (!emptyCell) {
-      return true; // No empty cells, Sudoku is solved
-    }
-
-    const [row, col] = emptyCell;
-
-    // Try filling the empty cell with values 1 to 9
-    for (let num = 1; num <= size; num++) {
-      if (isValid(board, row, col, num)) {
-        board[row][col] = num;
-
-        // Recursively try to solve the remaining Sudoku
-        if (solveSudoku(board)) {
-          return true;
-        }
-
-        // If the current assignment does not lead to a solution, backtrack
-        board[row][col] = 0;
-      }
-    }
-
-    // No valid value found for the current cell, backtrack
-    return false;
-  }
-
-  // Function to find an empty cell in the Sudoku board
-  function findEmptyCell(board) {
-    const size = 9;
-    for (let i = 0; i < size; i++) {
-      for (let j = 0; j < size; j++) {
-        if (board[i][j] === 0) {
-          return [i, j];
-        }
-      }
-    }
-    return null; // No empty cells
-  }
-
-  // Function to check if a number can be placed in a specific cell
-  function isValid(board, row, col, num) {
-    // Check if num is not present in the current row and column
+function isValid(board, row, col, num) {
+   // Check if the number is not present in the current row, column, and 3x3 quadrant
     for (let i = 0; i < 9; i++) {
-      if (board[row][i] === num || board[i][col] === num) {
-        return false;
-      }
-    }
-
-    // Check if num is not present in the current 3x3 subgrid
-    const subgridStartRow = Math.floor(row / 3) * 3;
-    const subgridStartCol = Math.floor(col / 3) * 3;
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        if (board[subgridStartRow + i][subgridStartCol + j] === num) {
-          return false;
-        }
-      }
-    }
-
-    return true; // Valid placement
-  }
-
-  // Function to generate a Sudoku board by removing some values
-  function generateSudokuBoard(solvedBoard) {
-    const size = 9;
-    const emptyCells = Math.floor(Math.random() * 20) + 20; // Adjust the number of empty cells as desired
-
-    // Create a deep copy of the solved board
-    const board = solvedBoard.map(row => row.slice());
-
-    // Randomly remove values to create the puzzle
-    for (let i = 0; i < emptyCells; i++) {
-      const row = Math.floor(Math.random() * size);
-      const col = Math.floor(Math.random() * size);
-      if (board[row][col] !== 0) {
-        board[row][col] = 0;
-      } else {
-        i--; // Try again if the cell is already empty
-      }
-    }
-
-    return board;
-  }
-
-  // Function to display the Sudoku board on the HTML table
-  function displaySudokuBoard(board) {
-    const table = document.getElementById("sudokuBoard");
-    table.innerHTML = "";
-
-    for (let i = 0; i < 9; i++) {
-      const row = table.insertRow(i);
-      for (let j = 0; j < 9; j++) {
-        const cell = row.insertCell(j);
-        cell.textContent = board[i][j] === 0 ? "" : board[i][j];
-      }
-    }
-  }
-
-  // Function to generate and display a new Sudoku puzzle
-  function generateSudoku() {
-    const solvedBoard = generateSolvedSudoku();
-    const puzzleBoard = generateSudokuBoard(solvedBoard);
-    displaySudokuBoard(puzzleBoard);
-  }
-
-  // Initial generation on page load
-  generateSudoku();
-
-  // Function to generate a solved Sudoku board
-  function generateSolvedSudoku() {
-    const board = [];
-    const size = 9;
-
-    // Initialize an empty board
-    for (let i = 0; i < size; i++) {
-      board[i] = [];
-      for (let j = 0; j < size; j++) {
-        board[i][j] = 0;
-      }
-    }
-
-    // Solve the Sudoku
-    solveSudoku(board);
-
-    return board;
-  }
-
-  // Function to solve Sudoku using backtracking
-  function solveSudoku(board) {
-    const size = 9;
-
-    // Find an empty cell
-    const emptyCell = findEmptyCell(board);
-    if (!emptyCell) {
-      return true; // No empty cells, Sudoku is solved
-    }
-
-    const [row, col] = emptyCell;
-
-    // Try filling the empty cell with values 1 to 9
-    for (let num = 1; num <= size; num++) {
-      if (isValid(board, row, col, num)) {
-        board[row][col] = num;
-
-        // Recursively try to solve the remaining Sudoku
-        if (solveSudoku(board)) {
-          return true;
-        }
-
-        // If the current assignment does not lead to a solution, backtrack
-        board[row][col] = 0;
-      }
-    }
-
-    // No valid value found for the current cell, backtrack
-    return false;
-  }
-
-  // Function to find an empty cell in the Sudoku board
-  function findEmptyCell(board) {
-    const size = 9;
-    for (let i = 0; i < size; i++) {
-      for (let j = 0; j < size; j++) {
-        if (board[i][j] === 0) {
-          return [i, j];
-        }
-      }
-    }
-    return null; // No empty cells
-  }
-
-  // Function to check if a number can be placed in a specific cell
-  function isValid(board, row, col, num) {
-    // Check if num is not present in the current row and column
-    for (let i = 0; i < 9; i++) {
-      if (board[row][i] === num || board[i][col] === num) {
-        return false;
-      }
-    }
-
-    // Check if num is not present in the current 3x3 subgrid
-    const subgridStartRow = Math.floor(row / 3) * 3;
-    const subgridStartCol = Math.floor(col / 3) * 3;
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        if (board[subgridStartRow + i][subgridStartCol + j] === num) {
-          return false;
+        if (board[row][i] === num || board[i][col] === num || board[row - row % 3 + Math.floor(i / 3)][col - col % 3 + i % 3] === num) {
+            return false;
         }
     }
-  }
-
-    return true; // Valid placement
+    return true;
 }
 
-  // Function to generate a Sudoku board by removing some values
-  function generateSudokuBoard(solvedBoard, difficulty) {
-    const size = 9;
-    let emptyCells;
+function solveSudoku(board) {
+    for (let row = 0; row < 9; row++) {
+        for (let col = 0; col < 9; col++) {
+            if (board[row][col] === 0) {
+                for (let num = 1; num <= 9; num++) {
+                    if (isValid(board, row, col, num)) {
+                        board[row][col] = num;
+                        oBoard[row][col] = num;
+                        if (solveSudoku(board)) {
+                            return true;
+                        }
 
-    switch (difficulty) {
-      case 'easy':
-        emptyCells = Math.floor(Math.random() * 15) + 25;
-        break;
-      case 'medium':
-        emptyCells = Math.floor(Math.random() * 10) + 20;
-        break;
-      case 'hard':
-        emptyCells = Math.floor(Math.random() * 5) + 15;
-        break;
-      default:
-        emptyCells = Math.floor(Math.random() * 20) + 20;
+                        board[row][col] = 0;
+                    }
+                }
+                return false;
+            }
+        }
     }
+    return true;
+}
+var a = 0;
 
-    // Create a deep copy of the solved board
-    const board = solvedBoard.map(row => row.slice());
-
-    // Randomly remove values to create the puzzle
-    for (let i = 0; i < emptyCells; i++) {
-      const row = Math.floor(Math.random() * size);
-      const col = Math.floor(Math.random() * size);
-      if (board[row][col] !== 0) {
-        board[row][col] = 0;
-      } else {
-        i--; // Try again if the cell is already empty
-      }
-    }
-
-    return board;
-  }
-
-  // Function to display the Sudoku board on the HTML table
-  function displaySudokuBoard(board) {
-    const table = document.getElementById("sudokuBoard");
-    table.innerHTML = "";
+function generateSudokuBoard() {
+    var board = [];
 
     for (let i = 0; i < 9; i++) {
-      const row = table.insertRow(i);
-      for (let j = 0; j < 9; j++) {
-        const cell = row.insertCell(j);
-        cell.textContent = board[i][j] === 0 ? "" : board[i][j];
-      }
+        board.push([]);
+        oBoard.push([]);
+        for (let j = 0; j < 9; j++) {
+            board[i].push(0);
+            oBoard[i].push(0);
+        }
     }
-  }
 
-  // Function to generate and display a new Sudoku puzzle
-  function generateSudoku(difficulty) {
-    const solvedBoard = generateSolvedSudoku();
-    const puzzleBoard = generateSudokuBoard(solvedBoard, difficulty);
-    displaySudokuBoard(puzzleBoard);
-  }
+    // Fill the first row
+    for (let i = 0; i < 9; i++) {
+        board[0][i] = shuffledFirstRow[i];
+        oBoard[0][i] = shuffledFirstRow[i];
+    }
 
-  // Initial generation on page load
-  generateSudoku('easy');
+    // Solve the Sudoku board
+    if (solveSudoku(board)) {
+        remove(board, szam2);
+        noBoard = board;
+
+        // Assign IDs to cells based on the board
+        for (let i = 0; i < 81; i++) {
+            if (board[Math.floor(i / 9)][i % 9] === null) {
+                taclaT[i].id = "valt" + a;
+                a++;
+            }
+        }
+
+        // Add event listener to each cell with an ID
+        for (let i = 0; i < 81; i++) {
+            const currentCell = taclaT[i];
+            if (currentCell.id) {
+                currentCell.addEventListener('click', function () {
+                    currentCell.innerText = szam;
+                });
+            }
+        }
+
+        // Create HTML table to display the Sudoku board
+        var boardLine = [];
+        for (let i = 0; i < 9; i++) {
+            for (let j = 0; j < 9; j++) {
+                boardLine.push(board[i][j]);
+            }
+        }
+        var div = document.createElement("div");
+        for (let i = 0; i < 81; i++) {
+            if (taclaT[i] == null) {
+                taclaT[i].appendChild(div);
+            } else {
+                taclaT[i].innerHTML = boardLine[i];
+            }
+        }
+        console.log(oBoard);
+    }
+}
+function valt(){
+    console.log("asd")
+
+}
+function valt2(){
+    console.log('asd')
+}
+
+function remove(board,num){
+    let randRow=0
+    let randCol=0
+    let counter=1
+    while (counter!=num) {
+        randRow=Math.floor(Math.random()*9)
+        randCol=Math.floor(Math.random()*9)
+        if (board[randRow][randCol]!=0&&board[randRow][randCol]!=null) {
+            board[randRow][randCol]=null
+            counter++
+        }
+        
+        
+    }
+}
+
+
+
+
+// Generate and display the Sudoku board
+generateSudokuBoard();
