@@ -1,94 +1,94 @@
-var boardIsSolved = false;
-var szam = 1;
-var szam2 = 1;
+var boardIsSolved = false
+var szam = 1
+var szam2 = 1
 
 function easy() {
-    szam2 = 20;
-    generateSudokuBoard();
+    szam2 = 20
+    generateSudokuBoard()
     resetTimer()
-    startTimer();
+    startTimer()
     
 }
 
 function medium() {
-    szam2 = 30;
-    generateSudokuBoard();
+    szam2 = 30
+    generateSudokuBoard()
     resetTimer()
-    startTimer();
+    startTimer()
 }
 
 function hard() {
-    szam2 = 40;
-    generateSudokuBoard();
+    szam2 = 40
+    generateSudokuBoard()
     resetTimer()
-    startTimer();
+    startTimer()
 }
 
 function expert() {
-    szam2 = 50;
-    generateSudokuBoard();
+    szam2 = 50
+    generateSudokuBoard()
     resetTimer()
-    startTimer();
+    startTimer()
 }
 
 function master() {
-    szam2 = 60;
-    generateSudokuBoard();
+    szam2 = 60
+    generateSudokuBoard()
     resetTimer()
-    startTimer();
+    startTimer()
 }
 
 
 function one(){
     if (szam !== null) {
-        szam = 1;
+        szam = 1
     }
 }
 
 function two(){
     if (szam !== null) {
-        szam = 2;
+        szam = 2
     }
 }
 function three(){
     if (szam !== null) {
-        szam = 3;
+        szam = 3
     }
 }
 function four(){
     if (szam !== null) {
-        szam = 4;
+        szam = 4
     }
 }
 function five(){
     if (szam !== null) {
-        szam = 5;
+        szam = 5
     }
 }
 function six(){
     if (szam !== null) {
-        szam = 6;
+        szam = 6
     }
 }
 function seven(){
     if (szam !== null) {
-        szam = 7;
+        szam = 7
     }
 }
 function eight(){
     if (szam !== null) {
-        szam = 8;
+        szam = 8
     }
 }
 function nine(){
     if (szam !== null) {
-        szam = 9;
+        szam = 9
     }
 }
 
 
-var firstRow = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-var shuffledFirstRow = firstRow.sort(() => 0.5 - Math.random());
+var firstRow = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+var shuffledFirstRow = firstRow.sort(() => 0.5 - Math.random())
 const sudokuBoard=document.getElementById('sudokuBoard')
 const taclaT=document.getElementsByClassName('number')
 var oBoard=[]
@@ -101,10 +101,10 @@ function isValid(board, row, col, num) {
    // Check if the number is not present in the current row, column, and 3x3 quadrant
     for (let i = 0; i < 9; i++) {
         if (board[row][i] === num || board[i][col] === num || board[row - row % 3 + Math.floor(i / 3)][col - col % 3 + i % 3] === num) {
-            return false;
+            return false
         }
     }
-    return true;
+    return true
 }
 
 function solveSudoku(board) {
@@ -113,110 +113,110 @@ function solveSudoku(board) {
             if (board[row][col] === 0) {
                 for (let num = 1; num <= 9; num++) {
                     if (isValid(board, row, col, num)) {
-                        board[row][col] = num;
-                        oBoard[row][col] = num;
+                        board[row][col] = num
+                        oBoard[row][col] = num
                         if (solveSudoku(board)) {
-                            return true;
+                            return true
                         }
 
-                        board[row][col] = 0;
+                        board[row][col] = 0
                     }
                 }
-                return false;
+                return false
             }
         }
     }
-    return true;
+    return true
 }
 function checkBoardCorrectness(board) {
     // Check if the board is correctly solved
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
             if (board[i][j] !== noBoard[i][j]) {
-                return false;
+                return false
             }
         }
     }
-    return true;
+    return true
 }
 
-var a = 0;
+var a = 0
 
 function generateSudokuBoard() {
-    var board = [];
+    var board = []
 
     for (let i = 0; i < 9; i++) {
-        board.push([]);
-        oBoard.push([]);
+        board.push([])
+        oBoard.push([])
         for (let j = 0; j < 9; j++) {
-            board[i].push(0);
-            oBoard[i].push(0);
+            board[i].push(0)
+            oBoard[i].push(0)
         }
     }
 
     // Fill the first row
     for (let i = 0; i < 9; i++) {
-        board[0][i] = shuffledFirstRow[i];
-        oBoard[0][i] = shuffledFirstRow[i];
+        board[0][i] = shuffledFirstRow[i]
+        oBoard[0][i] = shuffledFirstRow[i]
     }
 
     // Solve the Sudoku board
     if (solveSudoku(board)) {
-        remove(board, szam2);
-        noBoard = board;
+        remove(board, szam2)
+        noBoard = board
 
         // Assign IDs to cells based on the board
         for (let i = 0; i < 81; i++) {
             if (board[Math.floor(i / 9)][i % 9] === null) {
-                taclaT[i].id = "valt" + a;
-                a++;
+                taclaT[i].id = "valt" + a
+                a++
             }
         }
 
         // Add event listener to each cell with an ID
         for (let i = 0; i < 81; i++) {
-            const currentCell = taclaT[i];
+            const currentCell = taclaT[i]
             if (currentCell.id) {
                 currentCell.addEventListener('click', function () {
-                    movesHistory.push({ row: Math.floor(i / 9), col: i % 9, value: szam });
+                    movesHistory.push({ row: Math.floor(i / 9), col: i % 9, value: szam })
                     // Check if the clicked cell is empty
                     if (board[Math.floor(i / 9)][i % 9] === null) {
                         if (szam !== null) {
                             if (szam !== oBoard[Math.floor(i / 9)][i % 9]) {
-                                currentCell.style.backgroundColor = 'red';
+                                currentCell.style.backgroundColor = 'red'
                                 setTimeout(function () {
-                                    currentCell.style.backgroundColor = ''; // Reset color after a short delay
-                                }, 1000); // Adjust the delay as needed
+                                    currentCell.style.backgroundColor = '' // Reset color after a short delay
+                                }, 1000) // Adjust the delay as needed
                             } else {
                                 // Correct number, reset background color
-                                currentCell.style.backgroundColor = '';
+                                currentCell.style.backgroundColor = ''
                             }
         
-                            currentCell.innerText = szam;
+                            currentCell.innerText = szam
         
                             // Update valami array
-                            valami.push({ row: Math.floor(i / 9), col: i % 9, value: szam });
-                            console.log(valami); // Log the updated array
+                            valami.push({ row: Math.floor(i / 9), col: i % 9, value: szam })
+                            console.log(valami) // Log the updated array
                         }
                     }
                     
-                });
+                })
             }
         }
 
         // Create HTML table to display the Sudoku board
-        var boardLine = [];
+        var boardLine = []
         for (let i = 0; i < 9; i++) {
             for (let j = 0; j < 9; j++) {
-                boardLine.push(board[i][j]);
+                boardLine.push(board[i][j])
             }
         }
-        var div = document.createElement("div");
+        var div = document.createElement("div")
         for (let i = 0; i < 81; i++) {
             if (taclaT[i] == null) {
-                taclaT[i].appendChild(div);
+                taclaT[i].appendChild(div)
             } else {
-                taclaT[i].innerHTML = boardLine[i];
+                taclaT[i].innerHTML = boardLine[i]
             }
         }
         
@@ -246,73 +246,73 @@ console.log(valami)
 
 function checkUserInput() {
     for (let i = 0; i < valami.length; i++) {
-        const { row, col, value } = valami[i];
+        const { row, col, value } = valami[i]
         if (noBoard[row][col] !== value) {
-            return false; // User input doesn't match original board
+            return false // User input doesn't match original board
         }
     }
-    return true; // User input matches original board
+    return true // User input matches original board
 }
 
 
 // Generate and display the Sudoku board
-generateSudokuBoard();
+generateSudokuBoard()
 
 
 
 $(document).ready(function(){
-    $("#myModal").modal('show');
-});
-let timerInterval;
-let seconds = 0;
-let minutes = 0;
-let hours = 0;
+    $("#myModal").modal('show')
+})
+let timerInterval
+let seconds = 0
+let minutes = 0
+let hours = 0
 function startTimer() {
-    timerInterval = setInterval(updateTimer, 1000);
+    timerInterval = setInterval(updateTimer, 1000)
 }
 function updateTimer() {
-    seconds++;
+    seconds++
     if (seconds === 60) {
-        seconds = 0;
-        minutes++;
+        seconds = 0
+        minutes++
         if (minutes === 60) {
-            minutes = 0;
-            hours++;
+            minutes = 0
+            hours++
         }
     }
-    const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-    document.getElementById('timerDisplay').innerText = formattedTime;
+    const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`
+    document.getElementById('timerDisplay').innerText = formattedTime
 }
 function pad(value) {
-    return value < 10 ? `0${value}` : value;
+    return value < 10 ? `0${value}` : value
 }
-var movesHistory = [];
+var movesHistory = []
 
 function undoLastMove() {
     if (movesHistory.length > 0) {
-        const lastMove = movesHistory.pop();
-        const { row, col } = lastMove;
+        const lastMove = movesHistory.pop()
+        const { row, col } = lastMove
 
         // Reset the cell in the HTML
-        taclaT[row * 9 + col].innerText = '';
-        taclaT[row * 9 + col].style.backgroundColor = ''; // Reset background color
+        taclaT[row * 9 + col].innerText = ''
+        taclaT[row * 9 + col].style.backgroundColor = '' // Reset background color
 
         // Reset the value in the array
-        oBoard[row][col] = 0;
-        valami = valami.filter(item => !(item.row === row && item.col === col));
+        oBoard[row][col] = 0
+        valami = valami.filter(item => !(item.row === row && item.col === col))
 
         // Check user solution after undo
-        checkUserSolution();
+        checkUserSolution()
     }
 }
 function resetTimer() {
     // Clear the current interval and reset timer values
-    clearInterval(timerInterval);
-    seconds = 0;
-    minutes = 0;
-    hours = 0;
+    clearInterval(timerInterval)
+    seconds = 0
+    minutes = 0
+    hours = 0
 
     // Update the timer display
-    const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-    document.getElementById('timerDisplay').innerText = formattedTime;
+    const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`
+    document.getElementById('timerDisplay').innerText = formattedTime
 }
