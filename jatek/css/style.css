@@ -94,6 +94,24 @@ td {
     text-align: center;
     font-size: 2rem;
 }
+<<<<<<< HEAD
 #email{
     max-width: 40vw;
 }
+=======
+.modal-title{
+    
+    color: #FFFFFF;
+    margin-left: auto;
+    margin-right: auto;
+}
+.modal-header{
+    background-color: #0F0069;
+}
+.btn-block{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(0, 0, 0, 0.31);
+    width: 200px;
+}
+>>>>>>> bdff8a8ffe620ddc981ca572dd8de94b67416a34
