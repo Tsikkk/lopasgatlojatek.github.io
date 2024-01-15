@@ -1,34 +1,40 @@
 var boardIsSolved = false;
 var szam = 1;
-var szam2 = 2;
+var szam2 = 1;
 
 function easy() {
     szam2 = 20;
     generateSudokuBoard();
+    resetTimer()
     startTimer();
+    
 }
 
 function medium() {
     szam2 = 30;
     generateSudokuBoard();
+    resetTimer()
     startTimer();
 }
 
 function hard() {
     szam2 = 40;
     generateSudokuBoard();
+    resetTimer()
     startTimer();
 }
 
 function expert() {
     szam2 = 50;
     generateSudokuBoard();
+    resetTimer()
     startTimer();
 }
 
 function master() {
     szam2 = 60;
     generateSudokuBoard();
+    resetTimer()
     startTimer();
 }
 
@@ -172,6 +178,7 @@ function generateSudokuBoard() {
             const currentCell = taclaT[i];
             if (currentCell.id) {
                 currentCell.addEventListener('click', function () {
+                    movesHistory.push({ row: Math.floor(i / 9), col: i % 9, value: szam });
                     // Check if the clicked cell is empty
                     if (board[Math.floor(i / 9)][i % 9] === null) {
                         if (szam !== null) {
@@ -192,6 +199,7 @@ function generateSudokuBoard() {
                             console.log(valami); // Log the updated array
                         }
                     }
+                    
                 });
             }
         }
@@ -256,29 +264,55 @@ $(document).ready(function(){
     $("#myModal").modal('show');
 });
 let timerInterval;
-    let seconds = 0;
-    let minutes = 0;
-    let hours = 0;
-
-    function startTimer() {
-        timerInterval = setInterval(updateTimer, 1000);
-    }
-
-    function updateTimer() {
-        seconds++;
-        if (seconds === 60) {
-            seconds = 0;
-            minutes++;
-            if (minutes === 60) {
-                minutes = 0;
-                hours++;
-            }
+let seconds = 0;
+let minutes = 0;
+let hours = 0;
+function startTimer() {
+    timerInterval = setInterval(updateTimer, 1000);
+}
+function updateTimer() {
+    seconds++;
+    if (seconds === 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes === 60) {
+            minutes = 0;
+            hours++;
         }
-
-        const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-        document.getElementById('timerDisplay').innerText = formattedTime;
     }
+    const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    document.getElementById('timerDisplay').innerText = formattedTime;
+}
+function pad(value) {
+    return value < 10 ? `0${value}` : value;
+}
+var movesHistory = [];
 
-    function pad(value) {
-        return value < 10 ? `0${value}` : value;
+function undoLastMove() {
+    if (movesHistory.length > 0) {
+        const lastMove = movesHistory.pop();
+        const { row, col } = lastMove;
+
+        // Reset the cell in the HTML
+        taclaT[row * 9 + col].innerText = '';
+        taclaT[row * 9 + col].style.backgroundColor = ''; // Reset background color
+
+        // Reset the value in the array
+        oBoard[row][col] = 0;
+        valami = valami.filter(item => !(item.row === row && item.col === col));
+
+        // Check user solution after undo
+        checkUserSolution();
     }
+}
+function resetTimer() {
+    // Clear the current interval and reset timer values
+    clearInterval(timerInterval);
+    seconds = 0;
+    minutes = 0;
+    hours = 0;
+
+    // Update the timer display
+    const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    document.getElementById('timerDisplay').innerText = formattedTime;
+}
