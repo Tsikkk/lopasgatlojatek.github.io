@@ -94,11 +94,6 @@ td {
     text-align: center;
     font-size: 2rem;
 }
-<<<<<<< HEAD
-#email{
-    max-width: 40vw;
-}
-=======
 .modal-title{
     
     color: #FFFFFF;
@@ -114,4 +109,9 @@ td {
     background-color: rgba(0, 0, 0, 0.31);
     width: 200px;
 }
->>>>>>> bdff8a8ffe620ddc981ca572dd8de94b67416a34
+#email{
+    width: 30vw;
+}
+#subB{
+    background-color: red;
+}
