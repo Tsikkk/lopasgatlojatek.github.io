@@ -3,7 +3,7 @@ var szam = 1
 var szam2 = 1
 
 function easy() {
-    szam2 = 2
+    szam2 = 3
     generateSudokuBoard()
     resetTimer()
     startTimer()
@@ -189,7 +189,7 @@ function generateSudokuBoard() {
                             
                         }
                     }
-                    /*check()*/
+                    check()
                 })
             }
         }
@@ -317,14 +317,20 @@ for (let i = 0; i < 9; i++) {
     }
     
 }*/
+var szami=0
+function check() {
+    let hasRedBackground = false;
 
-function check(){
     for (let u = 0; u < taclaT.length; u++) {
-        if (taclaT[u].style.backgroundColor!="red") {
-            console.log("asd")
-            
+        if (taclaT[u].style.backgroundColor === 'red') {
+            hasRedBackground = true;
+            break; // No need to continue checking once we find one red square
         }
-        
     }
 
+    if (hasRedBackground) {
+        console.log("There is at least one square with a red background.");
+    } else {
+        console.log("All squares have valid backgrounds.");
+    }
 }
