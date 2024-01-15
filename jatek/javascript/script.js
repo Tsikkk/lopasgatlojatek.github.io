@@ -98,7 +98,6 @@ var noBoard=[]
 
 
 function isValid(board, row, col, num) {
-   // Check if the number is not present in the current row, column, and 3x3 quadrant
     for (let i = 0; i < 9; i++) {
         if (board[row][i] === num || board[i][col] === num || board[row - row % 3 + Math.floor(i / 3)][col - col % 3 + i % 3] === num) {
             return false
@@ -129,7 +128,6 @@ function solveSudoku(board) {
     return true
 }
 function checkBoardCorrectness(board) {
-    // Check if the board is correctly solved
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
             if (board[i][j] !== noBoard[i][j]) {
@@ -154,57 +152,47 @@ function generateSudokuBoard() {
         }
     }
 
-    // Fill the first row
     for (let i = 0; i < 9; i++) {
         board[0][i] = shuffledFirstRow[i]
         oBoard[0][i] = shuffledFirstRow[i]
     }
 
-    // Solve the Sudoku board
     if (solveSudoku(board)) {
         remove(board, szam2)
         noBoard = board
 
-        // Assign IDs to cells based on the board
         for (let i = 0; i < 81; i++) {
             if (board[Math.floor(i / 9)][i % 9] === null) {
                 taclaT[i].id = "valt" + a
                 a++
             }
         }
-
-        // Add event listener to each cell with an ID
         for (let i = 0; i < 81; i++) {
             const currentCell = taclaT[i]
             if (currentCell.id) {
                 currentCell.addEventListener('click', function () {
                     movesHistory.push({ row: Math.floor(i / 9), col: i % 9, value: szam })
-                    // Check if the clicked cell is empty
                     if (board[Math.floor(i / 9)][i % 9] === null) {
                         if (szam !== null) {
                             if (szam !== oBoard[Math.floor(i / 9)][i % 9]) {
                                 currentCell.style.backgroundColor = 'red'
                                 setTimeout(function () {
-                                    currentCell.style.backgroundColor = '' // Reset color after a short delay
-                                }, 1000) // Adjust the delay as needed
+                                    currentCell.style.backgroundColor = '' 
+                                }, 1000) 
                             } else {
-                                // Correct number, reset background color
                                 currentCell.style.backgroundColor = ''
                             }
         
                             currentCell.innerText = szam
         
-                            // Update valami array
                             valami.push({ row: Math.floor(i / 9), col: i % 9, value: szam })
-                            console.log(valami) // Log the updated array
+                            console.log(valami)
                         }
                     }
                     
                 })
             }
         }
-
-        // Create HTML table to display the Sudoku board
         var boardLine = []
         for (let i = 0; i < 9; i++) {
             for (let j = 0; j < 9; j++) {
@@ -248,14 +236,13 @@ function checkUserInput() {
     for (let i = 0; i < valami.length; i++) {
         const { row, col, value } = valami[i]
         if (noBoard[row][col] !== value) {
-            return false // User input doesn't match original board
+            return false
         }
     }
-    return true // User input matches original board
+    return true
 }
 
 
-// Generate and display the Sudoku board
 generateSudokuBoard()
 
 
@@ -293,26 +280,20 @@ function undoLastMove() {
         const lastMove = movesHistory.pop()
         const { row, col } = lastMove
 
-        // Reset the cell in the HTML
         taclaT[row * 9 + col].innerText = ''
-        taclaT[row * 9 + col].style.backgroundColor = '' // Reset background color
-
-        // Reset the value in the array
+        taclaT[row * 9 + col].style.backgroundColor = '' 
         oBoard[row][col] = 0
         valami = valami.filter(item => !(item.row === row && item.col === col))
 
-        // Check user solution after undo
         checkUserSolution()
     }
 }
 function resetTimer() {
-    // Clear the current interval and reset timer values
     clearInterval(timerInterval)
     seconds = 0
     minutes = 0
     hours = 0
 
-    // Update the timer display
     const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`
     document.getElementById('timerDisplay').innerText = formattedTime
 }
