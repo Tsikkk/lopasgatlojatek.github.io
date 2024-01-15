@@ -3,7 +3,7 @@ var szam = 1
 var szam2 = 1
 
 function easy() {
-    szam2 = 20
+    szam2 = 2
     generateSudokuBoard()
     resetTimer()
     startTimer()
@@ -97,6 +97,8 @@ var noBoard=[]
 
 
 
+
+
 function isValid(board, row, col, num) {
     for (let i = 0; i < 9; i++) {
         if (board[row][i] === num || board[i][col] === num || board[row - row % 3 + Math.floor(i / 3)][col - col % 3 + i % 3] === num) {
@@ -176,9 +178,7 @@ function generateSudokuBoard() {
                         if (szam !== null) {
                             if (szam !== oBoard[Math.floor(i / 9)][i % 9]) {
                                 currentCell.style.backgroundColor = 'red'
-                                setTimeout(function () {
-                                    currentCell.style.backgroundColor = '' 
-                                }, 1000) 
+                                 
                             } else {
                                 currentCell.style.backgroundColor = ''
                             }
@@ -186,10 +186,10 @@ function generateSudokuBoard() {
                             currentCell.innerText = szam
         
                             valami.push({ row: Math.floor(i / 9), col: i % 9, value: szam })
-                            console.log(valami)
+                            
                         }
                     }
-                    
+                    /*check()*/
                 })
             }
         }
@@ -230,7 +230,7 @@ function remove(board,num){
         
     }
 }
-console.log(valami)
+
 
 function checkUserInput() {
     for (let i = 0; i < valami.length; i++) {
@@ -307,4 +307,24 @@ function feliratkozas(){
     else{
         alert("Please fill out the box")
     }
+}
+console.log(noBoard)
+/*var checkB=[]
+
+for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+        checkB.push(noBoard[i][j])
+    }
+    
+}*/
+
+function check(){
+    for (let u = 0; u < taclaT.length; u++) {
+        if (taclaT[u].style.backgroundColor!="red") {
+            console.log("asd")
+            
+        }
+        
+    }
+
 }
