@@ -15,31 +15,20 @@
     </header>
     
     <main class="container">
-        <div class="row">
-            <div class="col " id="back" onclick="undoLastMove()"><div class="felsök"><p class="feli">Back</p></div></div>
-            <div class="col " id="timer"><div class="felsök"><p class="feli" id="timerDisplay">Time</p></div></div>
-            <div class="col " id="newGame" data-toggle="modal" data-target="#myModal"><div class="felsök"><p class="feli">New Game</p></div></div>
+        <div class="row" id="gombok">
+            <div class="col " class="back" onclick="undoLastMove()"><div class="felsök"><p class="feli">Back</p></div></div>
+            <div class="col " class="timer"><div class="felsök"><p class="feli" id="timerDisplay">Time</p></div></div>
+            <div class="col " class="newGame" data-toggle="modal" data-target="#myModal"><div class="felsök"><p class="feli">New Game</p></div></div>
         </div>
         <div class="row">
             <table id="sudokuBoard">
                 <tr>
                     <td class="number" ></td>
                     <td class="number" ></td>
+                    <td class="number borderRight" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                </tr>
-                <tr>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
+                    <td class="number borderRight" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
@@ -47,10 +36,21 @@
                 <tr>
                     <td class="number" ></td>
                     <td class="number" ></td>
+                    <td class="number borderRight" ></td>
+                    <td class="number" ></td>
+                    <td class="number" ></td>
+                    <td class="number borderRight" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
+                </tr>
+                <tr class="borderBottom">
                     <td class="number" ></td>
+                    <td class="number" ></td>
+                    <td class="number borderRight" ></td>
+                    <td class="number" ></td>
+                    <td class="number" ></td>
+                    <td class="number borderRight" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
@@ -58,10 +58,32 @@
                 <tr>
                     <td class="number" ></td>
                     <td class="number" ></td>
+                    <td class="number borderRight" ></td>
+                    <td class="number" ></td>
+                    <td class="number" ></td>
+                    <td class="number borderRight" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
+                </tr>
+                <tr >
                     <td class="number" ></td>
+                    <td class="number" ></td>
+                    <td class="number borderRight" ></td>
+                    <td class="number" ></td>
+                    <td class="number" ></td>
+                    <td class="number borderRight" ></td>
+                    <td class="number" ></td>
+                    <td class="number" ></td>
+                    <td class="number" ></td>
+                </tr>
+                <tr class="borderBottom">
+                    <td class="number" ></td>
+                    <td class="number" ></td>
+                    <td class="number borderRight" ></td>
+                    <td class="number" ></td>
+                    <td class="number" ></td>
+                    <td class="number borderRight" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
@@ -69,10 +91,21 @@
                 <tr>
                     <td class="number" ></td>
                     <td class="number" ></td>
+                    <td class="number borderRight" ></td>
+                    <td class="number" ></td>
+                    <td class="number" ></td>
+                    <td class="number borderRight" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
+                </tr>
+                <tr >
                     <td class="number" ></td>
+                    <td class="number" ></td>
+                    <td class="number borderRight" ></td>
+                    <td class="number" ></td>
+                    <td class="number" ></td>
+                    <td class="number borderRight" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
@@ -80,43 +113,10 @@
                 <tr>
                     <td class="number" ></td>
                     <td class="number" ></td>
+                    <td class="number borderRight" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                </tr>
-                <tr>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                </tr>
-                <tr>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                </tr>
-                <tr>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
-                    <td class="number" ></td>
+                    <td class="number borderRight" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
                     <td class="number" ></td>
@@ -124,15 +124,15 @@
             </table>
         </div>
         <div class="row">
-            <div class="col " onclick="one()"><div class="belsoszamok"><p class="szamok">1</p></div></div>
-            <div class="col " onclick="two()"><div class="belsoszamok"><p class="szamok">2</p></div></div>
-            <div class="col " onclick="three()"><div class="belsoszamok"><p class="szamok">3</p></div></div>
-            <div class="col " onclick="four()"><div class="belsoszamok"><p class="szamok">4</p></div></div>
-            <div class="col " onclick="five()"><div class="belsoszamok"><p class="szamok">5</p></div></div>
-            <div class="col " onclick="six()"><div class="belsoszamok"><p class="szamok">6</p></div></div>
-            <div class="col " onclick="seven()"><div class="belsoszamok"><p class="szamok">7</p></div></div>
-            <div class="col " onclick="eight()"><div class="belsoszamok"><p class="szamok">8</p></div></div>
-            <div class="col " onclick="nine()"><div class="belsoszamok"><p class="szamok">9</p></div></div>
+            <div class="col" onclick="one()"><div class="belsoszamok"><p class="szamok">1</p></div></div>
+            <div class="col" onclick="two()"><div class="belsoszamok"><p class="szamok">2</p></div></div>
+            <div class="col" onclick="three()"><div class="belsoszamok"><p class="szamok">3</p></div></div>
+            <div class="col" onclick="four()"><div class="belsoszamok"><p class="szamok">4</p></div></div>
+            <div class="col" onclick="five()"><div class="belsoszamok"><p class="szamok">5</p></div></div>
+            <div class="col" onclick="six()"><div class="belsoszamok"><p class="szamok">6</p></div></div>
+            <div class="col" onclick="seven()"><div class="belsoszamok"><p class="szamok">7</p></div></div>
+            <div class="col" onclick="eight()"><div class="belsoszamok"><p class="szamok">8</p></div></div>
+            <div class="col" onclick="nine()"><div class="belsoszamok"><p class="szamok">9</p></div></div>
         </div>
     </main>
   

@@ -2,12 +2,18 @@ var boardIsSolved = false
 var szam = 1
 var szam2 = 1
 
+function resetBackgrounColor() {
+    for (let i = 0; i < taclaT.length; i++) {
+        taclaT[i].style.backgroundColor=''  
+    }
+}
+
 function easy() {
-    szam2 = 3
+    szam2 = 20
     generateSudokuBoard()
     resetTimer()
     startTimer()
-    
+    resetBackgrounColor()
 }
 
 function medium() {
@@ -15,6 +21,7 @@ function medium() {
     generateSudokuBoard()
     resetTimer()
     startTimer()
+    resetBackgrounColor()
 }
 
 function hard() {
@@ -22,6 +29,7 @@ function hard() {
     generateSudokuBoard()
     resetTimer()
     startTimer()
+    resetBackgrounColor()
 }
 
 function expert() {
@@ -29,6 +37,7 @@ function expert() {
     generateSudokuBoard()
     resetTimer()
     startTimer()
+    resetBackgrounColor()
 }
 
 function master() {
@@ -36,6 +45,7 @@ function master() {
     generateSudokuBoard()
     resetTimer()
     startTimer()
+    resetBackgrounColor()
 }
 
 
@@ -250,6 +260,7 @@ generateSudokuBoard()
 $(document).ready(function(){
     $("#myModal").modal('show')
 })
+
 let timerInterval
 let seconds = 0
 let minutes = 0
@@ -270,6 +281,11 @@ function updateTimer() {
     const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`
     document.getElementById('timerDisplay').innerText = formattedTime
 }
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+
 function pad(value) {
     return value < 10 ? `0${value}` : value
 }
@@ -309,14 +325,8 @@ function feliratkozas(){
     }
 }
 console.log(noBoard)
-/*var checkB=[]
 
-for (let i = 0; i < 9; i++) {
-    for (let j = 0; j < 9; j++) {
-        checkB.push(noBoard[i][j])
-    }
-    
-}*/
+
 function check() {
     let hasRedBackground = false;
     let hasNullValue = false;
@@ -332,15 +342,10 @@ function check() {
         }
     }
 
-    if (hasRedBackground) {
-        console.log("There is at least one square with a red background.");
-    } else {
-        console.log("All squares have valid backgrounds.");
-    }
-
-    if (hasNullValue) {
-        console.log("There is at least one cell with null value.");
-    } else {
-        console.log("All cells have valid values.");
+    if (!hasRedBackground&&!hasNullValue) {
+        $(document).ready(function(){
+            $("#myModal").modal('show')
+            stopTimer()
+        })
     }
 }

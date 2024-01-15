@@ -115,3 +115,14 @@ td {
 #subB{
     background-color: red;
 }
+
+.borderRight{
+    border-right: 2px black solid;
+}
+.borderBottom{
+    border-bottom: 2px black solid;
+}
+#gombok{
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
