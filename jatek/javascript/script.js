@@ -317,14 +317,18 @@ for (let i = 0; i < 9; i++) {
     }
     
 }*/
-var szami=0
 function check() {
     let hasRedBackground = false;
+    let hasNullValue = false;
 
     for (let u = 0; u < taclaT.length; u++) {
         if (taclaT[u].style.backgroundColor === 'red') {
             hasRedBackground = true;
-            break; // No need to continue checking once we find one red square
+        }
+
+        const cellValue = taclaT[u].innerText;
+        if (cellValue === 'null' || cellValue === '') {
+            hasNullValue = true;
         }
     }
 
@@ -332,5 +336,11 @@ function check() {
         console.log("There is at least one square with a red background.");
     } else {
         console.log("All squares have valid backgrounds.");
+    }
+
+    if (hasNullValue) {
+        console.log("There is at least one cell with null value.");
+    } else {
+        console.log("All cells have valid values.");
     }
 }
