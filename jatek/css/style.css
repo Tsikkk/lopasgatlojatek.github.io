@@ -24,7 +24,7 @@ h1{
 }
 footer{
     background-color: #0F0069;
-    height: 170px;
+    min-height: 170px;
     max-width: 100%;
 }
 #contact{
@@ -38,7 +38,7 @@ footer{
 }
 #subbb{
     background-color: #D9D9D9;
-    max-width: 20vw;
+    width: 20vw;
 }
 li{
     list-style-type: none;
@@ -110,7 +110,7 @@ td {
     width: 200px;
 }
 #email{
-    width: 30vw;
+    min-width: 30vw;
 }
 #subB{
     background-color: red;
