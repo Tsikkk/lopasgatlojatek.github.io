@@ -84,8 +84,8 @@ table {
     border: 3px black solid;
 }
 td {
-    width: 3vw;
-    height: 6vh;
+    width: 50px;
+    height: 30px;
     border: 1px solid #000;
     text-align: center;
     font-size: 2rem;

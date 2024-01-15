@@ -316,3 +316,14 @@ function resetTimer() {
     const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`
     document.getElementById('timerDisplay').innerText = formattedTime
 }
+
+function feliratkozas(){
+    let email=document.getElementById('email')
+    if (email.value!= "") {
+        email.value="";
+        alert("Succesfully subscribed")
+    }
+    else{
+        alert("Please fill out the box")
+    }
+}
